@@ -1,0 +1,116 @@
+:root {
+  /* Variáveis de Tema */
+  --body-background: #2a3b2b;
+  --card-background: #4a7a4c;
+  --reset-button-color: #8CBA51;
+  
+  /* Dimensões e Tempo */
+  --card-margin: 5px;
+  --flip-duration: .5s;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--body-background);
+}
+
+.memory-game {
+  width: 940px;
+  height: 640px;
+  display: flex;
+  flex-wrap: wrap;
+  perspective: 1000px;
+}
+
+.memory-card {
+  /* Cálculo de tamanho: 25% - 10px de margem total */
+  width: calc(16.666% - (var(--card-margin) * 2));
+  height: calc(33.333% - (var(--card-margin) * 2));
+  margin: var(--card-margin);
+  
+  position: relative;
+  transform: scale(1);
+  transform-style: preserve-3d;
+  transition: transform var(--flip-duration);
+  box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+  
+  cursor: pointer;
+}
+
+.memory-card:active {
+  transform: scale(0.97);
+  transition: transform .2s;
+}
+
+.memory-card.flip {
+  transform: rotateY(180deg);
+}
+
+.front-face,
+.back-face {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  position: absolute;
+  border-radius: 5px;
+  background: var(--card-background);
+  backface-visibility: hidden;
+}
+
+.front-face {
+  transform: rotateY(180deg);
+}
+
+/* Estilo para o botão de Reset */
+#reset-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--reset-button-color); 
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+#reset-button:hover {
+  background-color: #2BAA11; /* Tom um pouco mais escuro para o hover */
+}
+
+#reset-button:active {
+  transform: translateY(2px);
+}
+
+/* Estilos para o Título e Contador */
+.game-info {
+  margin-bottom: 20px;
+  text-align: center;
+  color: white; /* Cor do texto */
+}
+
+.game-info h1 {
+  font-size: 3rem; /* Fonte grande para o título */
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.game-info p {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+#attempts-count {
+  color: #FFD700; /* Cor de destaque para o número de tentativas */
+}
